@@ -1,9 +1,8 @@
 public enum TokenType {
-    SELECTOR,
+    TEXT,
+    COMMA,
     LBRACE,
-    PROPERTY,
     COLON,
-    VALUE,
     SEMICOLON,
     RBRACE
 }

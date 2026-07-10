@@ -21,13 +21,17 @@ public class Main {
         // read through each line in the css file and lex through it, adding tokens to
         // list
         List<Token> tokens = new ArrayList<>();
-        Lexer lexer = new Lexer();
+        Lexer lexer = new Lexer(tokens);
         File cssFile = new File("styles.css");
         input = new Scanner(cssFile);
-
-        while (input.hasNextLine()) {
+        int j = 0;
+        /*while (input.hasNextLine())*/ for (int i = 0; i < 10; i++) {
             String line = input.nextLine();
-            lexer.processLine(tokens, line);
+            lexer.processLine(line);
+            for (; j < tokens.size(); j++) {
+                System.out.print(tokens.get(j).getTokenValue() + " ");
+            }
+            System.out.println();
         }
 
         // parse through tokens list and create objects for the formatter

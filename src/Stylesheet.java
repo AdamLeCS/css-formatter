@@ -7,4 +7,9 @@ public class Stylesheet {
     public Stylesheet() {
         rules = new ArrayList<>();
     }
+
+    public void addRule(Rule rule) {
+        rules.add(rule);
+    }
+
 }

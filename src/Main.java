@@ -25,17 +25,14 @@ public class Main {
         File cssFile = new File("styles.css");
         input = new Scanner(cssFile);
         int j = 0;
-        /*while (input.hasNextLine())*/ for (int i = 0; i < 10; i++) {
+        /*while (input.hasNextLine())*/ for (int i = 0; i < 15; i++) {
             String line = input.nextLine();
             lexer.processLine(line);
-            for (; j < tokens.size(); j++) {
-                System.out.print(tokens.get(j).getTokenValue() + " ");
-            }
-            System.out.println();
         }
 
         // parse through tokens list and create objects for the formatter
-        
+        Parser parser = new Parser(tokens);
+        parser.parse();
 
         input.close();
     }

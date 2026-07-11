@@ -13,4 +13,16 @@ public class Rule {
     public void addDeclaration(Declaration declaration) {
         declarations.add(declaration);
     }
+
+    public String getRuleName() {
+        return ruleName;
+    }
+
+    public void print() {
+        System.out.println(ruleName + " {");
+        for (Declaration declaration : declarations) {
+            declaration.print();
+        }
+        System.out.println("}");
+    }
 }

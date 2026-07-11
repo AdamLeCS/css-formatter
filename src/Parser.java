@@ -19,13 +19,10 @@ public class Parser {
     public void parse() {
         // parse through tokens list and make objects for formatter
         
-        /*while (currIndex < tokens.size()) {
+        while (currIndex < tokens.size()) {
             parseRule();           
-        } */
-
-        for(int i = 0; i < 3; i++) {
-            parseRule();
         }
+        stylesheet.print();
     }
 
     public void parseRule() {
@@ -35,7 +32,13 @@ public class Parser {
         // create rule
         Rule newRule = new Rule(selector);
 
-        // get declarations
+        // get declarations until rbrace is reached
+        while (tokens.get(currIndex).getTokenType() != TokenType.RBRACE) {
+            Declaration newDeclaration = parseDeclaration();
+            newRule.addDeclaration(newDeclaration);
+        }
+        // exits loop at rbrace token, so move forward one more
+        currIndex++;
 
         stylesheet.addRule(newRule);
     }
@@ -57,15 +60,41 @@ public class Parser {
             currIndex++;
             currToken = tokens.get(currIndex);
         }
+        // exits on an lbrace, so move to next token
+        currIndex++;
         // has extra space at the beginning from above logic
         stb.delete(0, 1);
-        System.out.println(stb.toString());
         return stb.toString();
     }
 
     public Declaration parseDeclaration() {
-
-        Declaration newDeclaration = new Declaration("", "");
+        Token currToken = tokens.get(currIndex);
+        String property = currToken.getTokenValue();
+        String value;
+        currIndex += 2;
+        currToken = tokens.get(currIndex);
+        
+        StringBuilder stb = new StringBuilder();
+        while (currToken.getTokenType() != TokenType.SEMICOLON) {
+            switch(currToken.getTokenType()) {
+                case TEXT:
+                    stb.append(" " + currToken.getTokenValue());
+                    break;
+                case COMMA:
+                    stb.append(",");
+                    break;
+                default:
+                    break;
+            }
+            currIndex++;
+            currToken = tokens.get(currIndex);
+        }
+        // exits on a semicolon, so move to next index
+        currIndex++;
+        // remove extra space at beginning
+        stb.delete(0, 1);
+        value = stb.toString();
+        Declaration newDeclaration = new Declaration(property, value);
         return newDeclaration;
     }
 

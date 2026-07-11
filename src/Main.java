@@ -25,7 +25,7 @@ public class Main {
         File cssFile = new File("styles.css");
         input = new Scanner(cssFile);
         int j = 0;
-        /*while (input.hasNextLine())*/ for (int i = 0; i < 15; i++) {
+        /*while (input.hasNextLine())*/ for (int i = 0; i < 16; i++) {
             String line = input.nextLine();
             lexer.processLine(line);
         }

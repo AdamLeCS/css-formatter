@@ -12,4 +12,13 @@ public class Stylesheet {
         rules.add(rule);
     }
 
+    public List<Rule> getRules() {
+        return rules;
+    }
+
+    public void print() {
+        for (Rule rule : rules) {
+            rule.print();
+        }
+    }
 }

@@ -7,7 +7,19 @@ public class Declaration {
         this.value = value;
     }
 
+    public String getProperty() {
+        return property;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
     public void print() {
         System.out.println(property + ": " + value + ";");
+    }
+
+    public String getDeclaration() {
+        return property + ": " + value + ";";
     }
 }

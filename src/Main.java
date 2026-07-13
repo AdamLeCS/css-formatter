@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,16 +25,27 @@ public class Main {
         Lexer lexer = new Lexer(tokens);
         File cssFile = new File("styles.css");
         input = new Scanner(cssFile);
-        int j = 0;
-        /*while (input.hasNextLine())*/ for (int i = 0; i < 16; i++) {
+        while (input.hasNextLine()) {
             String line = input.nextLine();
             lexer.processLine(line);
         }
+        input.close();
 
         // parse through tokens list and create objects for the formatter
         Parser parser = new Parser(tokens);
         parser.parse();
 
-        input.close();
+        // sort declarations for each rule
+        Formatter formatter = new Formatter(parser.getStylesheet(), priorityMap);
+        formatter.format();
+
+        String stylesheet = parser.getStylesheet().stylesheetToString();
+
+        // write the stylesheet to the file
+        try (FileWriter writer = new FileWriter("newfile.css")) {
+            writer.write(stylesheet);
+        } catch (Exception e) {
+            System.out.print(e.getStackTrace());
+        }
     }
 }

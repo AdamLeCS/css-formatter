@@ -21,4 +21,12 @@ public class Stylesheet {
             rule.print();
         }
     }
+
+    public String stylesheetToString() {
+        StringBuilder stb = new StringBuilder();
+        for (Rule rule : rules) {
+            stb.append(rule.getRule()).append("\n");
+        }
+        return stb.toString();
+    }
 }

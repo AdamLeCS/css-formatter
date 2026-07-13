@@ -1,5 +1,4 @@
 import java.util.List;
-import java.lang.StringBuilder;
 
 public class Parser {
     List<Token> tokens;
@@ -22,7 +21,6 @@ public class Parser {
         while (currIndex < tokens.size()) {
             parseRule();           
         }
-        stylesheet.print();
     }
 
     public void parseRule() {
